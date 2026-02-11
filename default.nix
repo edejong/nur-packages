@@ -9,16 +9,19 @@
 {
   pkgs ? import <nixpkgs> { },
 }:
-
+let
+  node-packages = import ./pkgs/node-packages {
+    inherit pkgs;
+    inherit (pkgs) nodejs;
+  };
+in
 {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  example-package = pkgs.callPackage ./pkgs/example-package { };
-  foo = pkgs.callPackage ./pkgs/node-packages {
-    # inherit pkgs;
-    # inherit (pkgs) nodejs;
-  };
+  # example-package = pkgs.callPackage ./pkgs/example-package { };
+
+  inherit (node-packages) get-shit-done-cc;
 }
