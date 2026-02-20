@@ -8,7 +8,7 @@
   xar,
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "formula-binary";
+  pname = "formula-bin";
   version = "1.2.1";
 
   src = fetchzip {
